@@ -8,18 +8,11 @@ const createNew = async (req, res, next) => {
   })
 
   try {
-    console.log('Request body:', req.body)
-
     // abortEarly: false trả về tất cả các lỗi thay vì chỉ lỗi đầu tiên
     await correctValidation.validateAsync(req.body, { abortEarly: false })
-
-    // next()
-
-    res.status(StatusCodes.CREATED).json({
-      message: 'Note: Board created successfully'
-    })
+    // validate dữ liệu thành công next qua controller
+    next()
   } catch (error) {
-    console.log(new Error(error).message)
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
       errors: new Error(error).message
     })
