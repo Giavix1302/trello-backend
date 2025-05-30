@@ -1,16 +1,13 @@
 import { StatusCodes } from 'http-status-codes'
-import ApiError from '~/utils/ApiError'
+import { boardService } from '~/services/boardService'
 
 const createNew = async (req, res, next) => {
   try {
 
-    // console.log('Request body:', req.body)
+    // Điều hướng sang tầng service
+    const createdBoard = await boardService.createNew(req.body)
 
-    // throw new ApiError()
-
-    res.status(StatusCodes.CREATED).json({
-      message: 'Controller: Board created successfully'
-    })
+    res.status(StatusCodes.CREATED).json(createdBoard)
   } catch (error) { next(error) }
 }
 
