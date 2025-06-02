@@ -2,6 +2,7 @@
 
 import { StatusCodes } from 'http-status-codes'
 import { slugify } from '~/utils/formatters.js'
+import { boardModel } from '~/models/boardModel'
 
 const createNew = async (reqBody) => {
   try {
@@ -11,10 +12,12 @@ const createNew = async (reqBody) => {
       slug: slugify(reqBody.title),
     }
     // gọi tới tầng model để xử lí lưu dữ liệu vào database
+    const createBoard = await boardModel.createNew(newBoard)
 
+    const getNewBoard = await boardModel.findOneById(createBoard.insertedId)
 
     // trả kết quả về trong service luon có return !!!
-    return newBoard
+    return getNewBoard
   } catch (error) {
     throw error
   }

@@ -3,7 +3,6 @@ import { boardService } from '~/services/boardService'
 
 const createNew = async (req, res, next) => {
   try {
-
     // Điều hướng sang tầng service
     const createdBoard = await boardService.createNew(req.body)
 
