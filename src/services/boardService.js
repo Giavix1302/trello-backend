@@ -41,7 +41,7 @@ const getDetails = async (boardId) => {
     })
 
     delete resBoard.cards
-    
+
     // trả kết quả về trong service luon có return !!!
     return resBoard
   } catch (error) {
