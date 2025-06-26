@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-catch */
-
 import { StatusCodes } from 'http-status-codes'
 import { slugify } from '~/utils/formatters.js'
 import { boardModel } from '~/models/boardModel'
