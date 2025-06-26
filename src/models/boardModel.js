@@ -7,7 +7,6 @@ import { cardModel } from '~/models/cardModel'
 import { columnModel } from '~/models/columnModel'
 
 // define the schema for a board
-
 const BOARD_COLLECTION_NAME = 'boards'
 const BOARD_COLLECTION_SCHEMA = Joi.object({
   title: Joi.string().required().min(3).max(50).trim().strict(),
