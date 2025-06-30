@@ -2,6 +2,7 @@ import Joi from 'joi'
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '~/utils/ApiError'
 import { BOARD_TYPES } from '~/utils/constants'
+
 const createNew = async (req, res, next) => {
   const correctValidation = Joi.object({
     title: Joi.string().required().min(3).max(50).trim().strict(),
@@ -19,6 +20,28 @@ const createNew = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  // khong require trong truong hop update
+  const correctValidation = Joi.object({
+    title: Joi.string().min(3).max(50).trim().strict(),
+    description: Joi.string().min(3).max(266).trim().strict(),
+    type: Joi.string().valid(BOARD_TYPES.PUBLIC, BOARD_TYPES.PRIVATE)
+  })
+
+  try {
+    // abortEarly: false trả về tất cả các lỗi thay vì chỉ lỗi đầu tiên
+    // trong trường hợp update, cho phép unknown để không cần đẩy một số field lên
+    await correctValidation.validateAsync(req.body, {
+      abortEarly: false,
+      allowUnknown: true
+    })
+    next()
+  } catch (error) {
+    next(new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, new Error(error).message))
+  }
+}
+
 export const boardValidation = {
-  createNew
+  createNew,
+  update
 }
