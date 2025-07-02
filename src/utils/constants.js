@@ -1,5 +1,5 @@
 export const WHITELIST_DOMAINS = [
-  'https://trello-web-alpha-peach.vercel.app/'
+  'https://trello-web-alpha-peach.vercel.app'
 ]
 
 export const BOARD_TYPES = {
